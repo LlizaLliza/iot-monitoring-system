@@ -123,4 +123,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'iot_api_key' => env('IOT_API_KEY', 'secret-iot-key-2026'),
 ];

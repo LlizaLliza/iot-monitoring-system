@@ -51,7 +51,9 @@ class Form extends Component
 
         $this->validate();
 
-        Machine::updateOrCreate(
+        $isNew = ! $this->machine; // cek apakah mesin baru
+
+        $savedMachine = Machine::updateOrCreate(
             ['id' => $this->machine?->id],
             [
                 'code' => $this->code,
@@ -62,6 +64,14 @@ class Form extends Component
                 'is_active' => $this->is_active,
             ]
         );
+
+        if ($isNew) {
+            $savedMachine->sensors()->create([
+                'sensor_code' => $savedMachine->code . '-TEMP',
+                'metric_type' => 'temperature',
+                'unit' => 'celsius',
+            ]);
+        }
 
         session()->flash('message', $this->machine ? 'Mesin berhasil diperbarui.' : 'Mesin berhasil ditambahkan.');
 
