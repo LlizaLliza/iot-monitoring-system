@@ -1,6 +1,7 @@
 <?php
 
-$apiUrl = 'http://127.0.0.1:8000/api/sensor-data';
+//$apiUrl = 'http://127.0.0.1:8000/api/sensor-data';
+$apiUrl='http://monitoring-app.test/api/sensor-data';
 $apiKey = 'secret-iot-key-2026'; 
 
 $machines = [
