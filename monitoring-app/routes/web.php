@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Machine\Index as MachinesIndex;
 use App\Livewire\Machine\Form as MachinesForm;
+use App\Http\Controllers\DashboardStreamController;
 
 Route::view('/', 'welcome');
 
@@ -15,6 +16,8 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard/stream', [DashboardStreamController::class, 'stream'])->name('dashboard.stream');
+    
     Route::get('/machines', MachinesIndex::class)->name('machines.index');
 
     Route::middleware('role:admin')->group(function () {
